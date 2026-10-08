@@ -145,4 +145,65 @@
       btn.style.top = `${randomY}px`;
 
       if (kacmaSayisi < maxKacma) {
-        const yeniOlcek = Math.max(0.75,
+        const yeniOlcek = Math.max(0.75, 1 - (kacmaSayisi * 0.05));
+        btn.style.transform = `scale(${yeniOlcek})`;
+        mesaj.innerText = laflar[kacmaSayisi - 1];
+        btn.innerText = "Kaçtım! 🏃";
+      } else {
+        btn.style.transform = "scale(1)";
+        btn.className = "absolute bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-2.5 rounded-full text-xs shadow-lg shadow-emerald-500/40 animate-pulse cursor-pointer whitespace-nowrap";
+        btn.innerText = "Tamam Teslim Oldum, Tıkla ❤️";
+        mesaj.innerText = "Tamam tamam yakaladın! 🎉";
+        ipucu.innerText = "Aşırı tatlısın, butona dokunup hediyeni açabilirsin:";
+      }
+    }
+
+    btn.addEventListener('touchstart', butonuKacir, { passive: false });
+    btn.addEventListener('mouseover', butonuKacir);
+
+    btn.addEventListener('click', (e) => {
+      if (kacmaSayisi < maxKacma) {
+        butonuKacir(e);
+      } else {
+        document.getElementById('oyunAlaniKutusu').classList.add('hidden');
+        hediye.classList.remove('hidden');
+
+        confetti({ particleCount: 160, spread: 80, origin: { y: 0.6 } });
+        setTimeout(() => {
+          confetti({ particleCount: 100, angle: 60, spread: 60, origin: { x: 0 } });
+          confetti({ particleCount: 100, angle: 120, spread: 60, origin: { x: 1 } });
+        }, 300);
+      }
+    });
+
+    const audio = document.getElementById('bgMusic');
+    let isPlaying = false;
+    function muzikCal() {
+      if (!isPlaying) {
+        audio.play().then(() => {
+          isPlaying = true;
+          document.getElementById('musicText').innerText = "Çalıyor 🎶";
+          document.getElementById('musicIcon').innerText = "⏸️";
+        }).catch(() => alert("Şarkı çalınamadı. Klasörde wegh.mp3 olduğundan emin ol!"));
+      } else {
+        audio.pause();
+        isPlaying = false;
+        document.getElementById('musicText').innerText = "Şarkımız";
+        document.getElementById('musicIcon').innerText = "🎵";
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-bg');
+      heart.innerHTML = ['❤️', '💖', '✨', '💕', '🌸'][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 2.5 + 4 + 's';
+      heart.style.fontSize = Math.random() * 10 + 16 + 'px';
+      document.getElementById('heartContainer').appendChild(heart);
+      setTimeout(() => heart.remove(), 6500);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
