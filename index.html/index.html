@@ -3,241 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>İyi ki Doğdun Sevgilim! ❤️</title>
+  <title>İyi ki Doğdun Aşkımmm ❤️</title>
   
-  <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    .font-handwriting {
-      font-family: 'Caveat', cursive;
-    }
-    /* Uçuşan Kalp Animasyonu */
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-handwriting { font-family: 'Caveat', cursive; }
+    
+    /* Uçuşan Kalpler */
     @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+      0% { transform: translateY(105vh) scale(0.6); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
     }
-    .heart-particle {
+    .heart-bg {
       position: fixed;
-      bottom: -20px;
-      font-size: 20px;
+      bottom: -30px;
       animation: floatUp 6s linear infinite;
       z-index: 0;
       pointer-events: none;
       user-select: none;
     }
-    /* Polaroid Gölgesi ve Duruşu */
-    .polaroid {
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-    }
-    .polaroid:hover {
-      transform: scale(1.04) rotate(0deg) !important;
-      z-index: 10;
+
+    /* Kaçan Buton Geçişi */
+    #kacanButon {
+      transition: left 0.18s ease-out, top 0.18s ease-out, transform 0.2s ease;
+      touch-action: none;
     }
   </style>
 </head>
-<body class="bg-rose-50 text-slate-800 min-h-screen relative overflow-x-hidden selection:bg-rose-200">
+<body class="bg-gradient-to-b from-rose-50 via-pink-50 to-rose-100 text-slate-800 min-h-screen relative overflow-x-hidden selection:bg-rose-200 flex flex-col justify-between p-4">
 
-  <!-- Arka Planda Uçuşan Kalpler Alanı -->
+  <!-- Uçuşan Kalp Efekti -->
   <div id="heartContainer"></div>
 
-  <!-- Gizli Müzik Oynatıcı (Klasöre sarkimiz.mp3 koyarsan çalar) -->
+  <!-- Müzik Çalar (Klasörde sarkimiz.mp3 varsa çalar) -->
   <audio id="bgMusic" loop src="sarkimiz.mp3"></audio>
-
-  <!-- Müzik Kontrol Butonu (Sağ Üst) -->
-  <div class="fixed top-4 right-4 z-50">
-    <button onclick="muzikCal()" id="musicBtn" class="flex items-center gap-2 bg-white/80 backdrop-blur-md px-3.5 py-2 rounded-full border border-rose-200 shadow-md text-xs font-bold text-rose-600 hover:bg-white transition active:scale-95">
-      <span id="musicIcon">🎵</span>
-      <span id="musicText">Şarkımızı Başlat</span>
+  <div class="fixed top-3 right-3 z-50">
+    <button onclick="muzikCal()" id="musicBtn" class="bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-rose-200 shadow-sm text-xs font-bold text-rose-600 hover:bg-white transition active:scale-95">
+      <span id="musicIcon">🎵</span> <span id="musicText">Şarkımız</span>
     </button>
   </div>
 
-  <div class="max-w-2xl mx-auto px-4 py-12 relative z-10 space-y-12">
+  <div class="max-w-md mx-auto w-full my-auto text-center space-y-6 relative z-10 py-6">
 
-    <!-- 1. GİRİŞ: BAŞLIK -->
-    <div class="text-center space-y-3">
-      <span class="inline-block bg-rose-100 text-rose-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-        ✨ Bugün Çok Özel Bir Gün ✨
+    <!-- BAŞLIK -->
+    <div class="space-y-1">
+      <span class="inline-block bg-rose-200 text-rose-700 px-3 py-1 rounded-full text-xs font-black tracking-wider uppercase">
+        ✨ 1 NUMARALI GÜN ✨
       </span>
-      <h1 class="text-3xl sm:text-5xl font-black text-rose-950 tracking-tight">
-        İyi ki Doğdun Sevgilim!
+      <h1 class="text-3xl sm:text-4xl font-black text-rose-950 tracking-tight">
+        İyi ki doğdun aşkımmm ❤️
       </h1>
-      <p class="text-sm sm:text-base text-rose-700/80 max-w-md mx-auto font-medium">
-        Dünyanın en tatlı insanının yeni yaşı kutlu olsun. İyi ki hayatımdasın, iyi ki varsın.
+      <p class="text-xs text-rose-600 font-bold">
+        Dünyanın en güzel kalpli insanı, iyi ki varsın!
       </p>
     </div>
 
-    <!-- 2. İNTERAKTİF PASTA VE MUM ÜFLEME -->
-    <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-rose-200 shadow-xl text-center space-y-6">
-      <div class="space-y-1">
-        <h2 class="text-base font-bold text-slate-800">Dilek Tutma Zamanı!</h2>
-        <p class="text-xs text-slate-500">Önce içinden güzel bir dilek tut, sonra butona basıp mumları üfle.</p>
-      </div>
-
-      <!-- Pasta Görseli & Alevler -->
-      <div class="py-4">
-        <div class="text-7xl sm:text-8xl select-none transition duration-500 transform" id="cakeIcon">
-          🎂
-        </div>
-        <div id="candleFlame" class="text-sm font-bold text-amber-500 animate-pulse mt-2">
-          🔥 Mumlar Yanıyor...
+    <!-- MERKEZDEKİ TEK FOTOĞRAF -->
+    <div class="relative inline-block mx-auto">
+      <div class="w-64 h-64 sm:w-72 sm:h-72 p-3 bg-white rounded-3xl shadow-2xl border-4 border-rose-200 transform -rotate-1 hover:rotate-0 transition duration-300">
+        <div class="w-full h-full rounded-2xl overflow-hidden bg-rose-100">
+          <img src="foto.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80'" class="w-full h-full object-cover">
         </div>
       </div>
-
-      <button onclick="mumlariUfle()" id="ufleBtn" class="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold py-3.5 px-8 rounded-full shadow-lg shadow-rose-500/25 transition active:scale-95 text-sm">
-        ✨ Dileğimi Tuttum, Mumları Üfle!
-      </button>
-
-      <div id="wishMessage" class="hidden text-sm font-semibold text-rose-700 pt-2 animate-bounce">
-        🎉 Tüm dileklerinin gerçekleştiği harika bir yaş olsun! ❤️
+      <div class="absolute -bottom-3 -right-2 bg-rose-500 text-white text-xs font-extrabold px-3 py-1 rounded-full shadow-lg">
+        Ömrüm 💕
       </div>
     </div>
 
-    <!-- 3. BİZİM EN GÜZEL ANLARIMIZ (POLAROID FOTOĞRAFLAR) -->
-    <div class="space-y-4">
-      <div class="text-center">
-        <h2 class="text-xl font-bold text-slate-900">Bizim Güzel Anlarımız</h2>
-        <p class="text-xs text-slate-500">Gülüşünle güzelleşen her anım iyi ki seninle...</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
-        <!-- Fotoğraf 1 -->
-        <div class="polaroid bg-white p-3 rounded-lg transform -rotate-3">
-          <div class="aspect-square bg-rose-100 rounded overflow-hidden">
-            <img src="foto1.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500&auto=format&fit=crop&q=80'" class="w-full h-full object-cover">
-          </div>
-          <p class="font-handwriting text-xl text-center text-slate-700 mt-2">İlk anlarımızdan biri...</p>
-        </div>
-
-        <!-- Fotoğraf 2 -->
-        <div class="polaroid bg-white p-3 rounded-lg transform rotate-2">
-          <div class="aspect-square bg-rose-100 rounded overflow-hidden">
-            <img src="foto2.jpg" onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&auto=format&fit=crop&q=80'" class="w-full h-full object-cover">
-          </div>
-          <p class="font-handwriting text-xl text-center text-slate-700 mt-2">En sevdiğim gülüşün ❤️</p>
-        </div>
-
-        <!-- Fotoğraf 3 -->
-        <div class="polaroid bg-white p-3 rounded-lg transform -rotate-2">
-          <div class="aspect-square bg-rose-100 rounded overflow-hidden">
-            <img src="foto3.jpg" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&auto=format&fit=crop&q=80'" class="w-full h-full object-cover">
-          </div>
-          <p class="font-handwriting text-xl text-center text-slate-700 mt-2">Birlikte binlerce anıya...</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. GİZLİ MEKTUP / SÜRPRİZ KUTUSU -->
-    <div class="bg-gradient-to-br from-rose-100 to-pink-100 rounded-3xl p-6 sm:p-8 border border-rose-200 text-center space-y-4">
-      <div class="text-4xl">💌</div>
-      <h2 class="text-lg font-bold text-rose-950">Sana Küçük Bir Mektubum Var</h2>
-      <p class="text-xs text-rose-800/80 max-w-sm mx-auto">
-        Aşağıdaki butona dokunup doğum günü mektubunu okuyabilirsin.
+    <!-- OYUN ALANI -->
+    <div id="oyunAlaniKutusu" class="bg-white/80 backdrop-blur-md rounded-3xl p-5 border border-rose-200 shadow-lg space-y-3">
+      <div class="text-3xl animate-bounce">🎁</div>
+      <h2 id="oyunMesaj" class="text-base font-extrabold text-slate-900">
+        Sana küçük bir hediyem var!
+      </h2>
+      <p id="ipucuYazi" class="text-xs text-slate-500 font-semibold">
+        Aşağıdaki butona tıkla ve hediyeni aç:
       </p>
 
-      <button onclick="mektupAc()" class="bg-white text-rose-600 font-bold px-6 py-2.5 rounded-full text-xs shadow-sm hover:bg-rose-50 transition border border-rose-200">
-        Mektubu Aç 📖
-      </button>
-
-      <!-- Açılan Mektup Alanı -->
-      <div id="letterContent" class="hidden bg-white/95 rounded-2xl p-6 border border-rose-200 text-left space-y-3 mt-4 text-xs sm:text-sm leading-relaxed text-slate-700 shadow-inner">
-        <p class="font-bold text-rose-950 text-sm">Canım Sevgilim,</p>
-        <p>
-          Hayatıma girdiğin ilk andan beri her günümü daha neşeli, daha anlamlı ve daha güzel kıldığın için teşekkür ederim. Gülüşün, enerjin ve yanımda oluşun benim için dünyadaki en kıymetli hediye.
-        </p>
-        <p>
-          Yeni yaşında dilediğin tüm hayallerin gerçekleşsin; beraber keşfedeceğimiz nice güzel yollar, kutlayacağımız nice doğum günleri olsun. Seni çok seviyorum!
-        </p>
-        <p class="text-right font-handwriting text-2xl text-rose-600 font-bold pt-2">
-          Daima seninle... ❤️
-        </p>
-      </div>
-    </div>
-
-    <!-- ALT BİLGİ -->
-    <div class="text-center text-xs text-rose-400 font-medium pb-8">
-      Sonsuza dek seninle. İyi ki doğdun! 🎂
-    </div>
-
-  </div>
-
-  <script>
-    // 1. Müzik Başlatma / Durdurma
-    const audio = document.getElementById('bgMusic');
-    let isPlaying = false;
-
-    function muzikCal() {
-      if (!isPlaying) {
-        audio.play().then(() => {
-          isPlaying = true;
-          document.getElementById('musicText').innerText = "Çalıyor 🎶";
-          document.getElementById('musicIcon').innerText = "⏸️";
-        }).catch(err => {
-          alert("Şarkı dosyan (sarkimiz.mp3) bulunamadı veya tarayıcı izni gerekiyor!");
-        });
-      } else {
-        audio.pause();
-        isPlaying = false;
-        document.getElementById('musicText').innerText = "Şarkıyı Başlat";
-        document.getElementById('musicIcon').innerText = "🎵";
-      }
-    }
-
-    // 2. Mum Üfleme & Konfeti Patlatma
-    function mumlariUfle() {
-      document.getElementById('candleFlame').innerHTML = "✨ Mumlar Söndü! Dileğin Kabul Olsun ✨";
-      document.getElementById('candleFlame').className = "text-sm font-bold text-rose-600 mt-2";
-      document.getElementById('wishMessage').classList.remove('hidden');
-      document.getElementById('ufleBtn').classList.add('opacity-50', 'pointer-events-none');
-
-      // Renkli Konfeti Efekti
-      confetti({
-        particleCount: 120,
-        spread: 80,
-        origin: { y: 0.6 }
-      });
-      setTimeout(() => {
-        confetti({
-          particleCount: 80,
-          angle: 60,
-          spread: 60,
-          origin: { x: 0 }
-        });
-        confetti({
-          particleCount: 80,
-          angle: 120,
-          spread: 60,
-          origin: { x: 1 }
-        });
-      }, 400);
-    }
-
-    // 3. Mektup Açma
-    function mektupAc() {
-      const letter = document.getElementById('letterContent');
-      letter.classList.toggle('hidden');
-    }
-
-    // 4. Ekranda Uçuşan Kalp Efekti
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart-particle');
-      heart.innerHTML = ['❤️', '💖', '✨', '🌸', '💕'][Math.floor(Math.random() * 5)];
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-      heart.style.fontSize = Math.random() * 12 + 16 + 'px';
-      document.getElementById('heartContainer').appendChild(heart);
-      setTimeout(() => heart.remove(), 7000);
-    }
-    setInterval(createHeart, 600);
-  </script>
-</body>
-</html>
+      <!-- Butonun Kaçacağı Güvenli Kutu -->
+      <div id="gameBoundary" class="relative w-full h-36 bg-rose-50/50 rounded-2xl border border-dashed border-rose-300 flex items-center justify-center overflow-hidden">
+        <button id="kacanButon" class="absolute bg
