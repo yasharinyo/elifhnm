@@ -8,14 +8,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-handwriting { font-family: 'Caveat', cursive; }
     
-    /* Uçuşan Kalpler */
     @keyframes floatUp {
       0% { transform: translateY(105vh) scale(0.6); opacity: 1; }
       100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
@@ -29,63 +28,194 @@
       user-select: none;
     }
 
-    /* Kaçan Buton Geçişi */
     #kacanButon {
       transition: left 0.18s ease-out, top 0.18s ease-out, transform 0.2s ease;
       touch-action: none;
     }
   </style>
 </head>
-<body class="bg-gradient-to-b from-rose-50 via-pink-50 to-rose-100 text-slate-800 min-h-screen relative overflow-x-hidden selection:bg-rose-200 flex flex-col justify-between p-4">
+<body class="bg-gradient-to-b from-rose-50 via-pink-50 to-rose-100 text-slate-800 min-h-screen relative overflow-x-hidden selection:bg-rose-200 flex flex-col justify-between p-3 sm:p-6">
 
-  <!-- Uçuşan Kalp Efekti -->
+  <!-- Uçuşan Kalpler -->
   <div id="heartContainer"></div>
 
-  <!-- Müzik Çalar (Klasörde sarkimiz.mp3 varsa çalar) -->
+  <!-- Müzik Çalar -->
   <audio id="bgMusic" loop src="sarkimiz.mp3"></audio>
   <div class="fixed top-3 right-3 z-50">
-    <button onclick="muzikCal()" id="musicBtn" class="bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-rose-200 shadow-sm text-xs font-bold text-rose-600 hover:bg-white transition active:scale-95">
+    <button onclick="muzikCal()" id="musicBtn" class="bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-200 shadow-sm text-xs font-bold text-rose-600 hover:bg-white transition active:scale-95">
       <span id="musicIcon">🎵</span> <span id="musicText">Şarkımız</span>
     </button>
   </div>
 
-  <div class="max-w-md mx-auto w-full my-auto text-center space-y-6 relative z-10 py-6">
+  <div class="max-w-lg mx-auto w-full my-auto text-center space-y-6 relative z-10 py-4">
 
     <!-- BAŞLIK -->
     <div class="space-y-1">
-      <span class="inline-block bg-rose-200 text-rose-700 px-3 py-1 rounded-full text-xs font-black tracking-wider uppercase">
-        ✨ 1 NUMARALI GÜN ✨
+      <span class="inline-block bg-rose-200 text-rose-700 px-3 py-1 rounded-full text-[11px] font-black tracking-wider uppercase">
+        ✨ İYİ Kİ VARSIN ✨
       </span>
-      <h1 class="text-3xl sm:text-4xl font-black text-rose-950 tracking-tight">
+      <h1 class="text-3xl sm:text-5xl font-black text-rose-950 tracking-tight">
         İyi ki doğdun aşkımmm ❤️
       </h1>
-      <p class="text-xs text-rose-600 font-bold">
-        Dünyanın en güzel kalpli insanı, iyi ki varsın!
+      <p class="text-xs sm:text-sm text-rose-600 font-bold">
+        Güzeller güzeli sevgilim, yeni yaşın kutlu olsun!
       </p>
     </div>
 
-    <!-- MERKEZDEKİ TEK FOTOĞRAF -->
-    <div class="relative inline-block mx-auto">
-      <div class="w-64 h-64 sm:w-72 sm:h-72 p-3 bg-white rounded-3xl shadow-2xl border-4 border-rose-200 transform -rotate-1 hover:rotate-0 transition duration-300">
-        <div class="w-full h-full rounded-2xl overflow-hidden bg-rose-100">
-          <img src="foto.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80'" class="w-full h-full object-cover">
+    <!-- ORTADA KOCAMAN FOTOĞRAF (elif.JPEG) -->
+    <div class="relative inline-block mx-auto w-full px-4">
+      <div class="w-full max-w-sm mx-auto aspect-[4/5] sm:aspect-square p-3 bg-white rounded-3xl shadow-2xl border-4 border-rose-200 transform -rotate-1 hover:rotate-0 transition duration-300">
+        <div class="w-full h-full rounded-2xl overflow-hidden bg-rose-100 relative">
+          <!-- Dosya adının birebir elif.JPEG olması için ayarlandı -->
+          <img src="elif.JPEG" alt="Elif" class="w-full h-full object-cover">
         </div>
       </div>
-      <div class="absolute -bottom-3 -right-2 bg-rose-500 text-white text-xs font-extrabold px-3 py-1 rounded-full shadow-lg">
-        Ömrüm 💕
+      <div class="absolute -bottom-3 right-8 sm:right-16 bg-rose-500 text-white text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg">
+        Her şeyim 💕
       </div>
     </div>
 
-    <!-- OYUN ALANI -->
-    <div id="oyunAlaniKutusu" class="bg-white/80 backdrop-blur-md rounded-3xl p-5 border border-rose-200 shadow-lg space-y-3">
+    <!-- MATRUŞKA KAÇAN BUTON OYUN ALANI -->
+    <div id="oyunAlaniKutusu" class="bg-white/85 backdrop-blur-md rounded-3xl p-5 border border-rose-200 shadow-lg space-y-3 mx-2">
       <div class="text-3xl animate-bounce">🎁</div>
       <h2 id="oyunMesaj" class="text-base font-extrabold text-slate-900">
-        Sana küçük bir hediyem var!
+        Sana özel bir hediyem var!
       </h2>
       <p id="ipucuYazi" class="text-xs text-slate-500 font-semibold">
-        Aşağıdaki butona tıkla ve hediyeni aç:
+        Hediyeni açmak için butona basman gerek:
       </p>
 
-      <!-- Butonun Kaçacağı Güvenli Kutu -->
-      <div id="gameBoundary" class="relative w-full h-36 bg-rose-50/50 rounded-2xl border border-dashed border-rose-300 flex items-center justify-center overflow-hidden">
-        <button id="kacanButon" class="absolute bg
+      <div id="gameBoundary" class="relative w-full h-36 bg-rose-50/60 rounded-2xl border-2 border-dashed border-rose-300 flex items-center justify-center overflow-hidden">
+        <button id="kacanButon" class="absolute bg-rose-500 active:scale-95 hover:bg-rose-600 text-white font-extrabold px-6 py-2.5 rounded-full text-xs shadow-md shadow-rose-500/30 whitespace-nowrap select-none">
+          Hediyen İçin Tıkla 🎁
+        </button>
+      </div>
+    </div>
+
+    <!-- HEDİYE / MEKTUP ALANI (YAKALAYINCA AÇILIR) -->
+    <div id="hediyeAlani" class="hidden bg-white rounded-3xl p-6 border-2 border-rose-300 shadow-2xl text-left space-y-3 mx-2">
+      <div class="flex items-center gap-2 border-b border-rose-100 pb-2">
+        <span class="text-2xl">💌</span>
+        <h3 class="text-sm font-black text-rose-950">Hediyen Açıldı!</h3>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+        Tebrikler yakaladın! Hayatıma girdiğin ilk andan beri hayatıma kattığın tüm güzellikler için sana teşekkür ederim.
+      </p>
+      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+        Yeni yaşında tüm hayallerin gerçek olsun; beraber güleceğimiz, keşfedeceğimiz ve kutlayacağımız upuzun yıllarımız olsun. Seni çok ama çok seviyorum!
+      </p>
+      <div class="pt-2 text-right">
+        <span class="font-handwriting text-2xl sm:text-3xl text-rose-600 font-bold">Daima seninle... ❤️</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-center text-[11px] text-rose-400 font-semibold pb-2">
+    Sonsuza dek seninle. İyi ki doğdun! 🎂
+  </div>
+
+  <script>
+    const btn = document.getElementById('kacanButon');
+    const boundary = document.getElementById('gameBoundary');
+    const mesaj = document.getElementById('oyunMesaj');
+    const ipucu = document.getElementById('ipucuYazi');
+    const hediye = document.getElementById('hediyeAlani');
+
+    let kacmaSayisi = 0;
+    const maxKacma = 5;
+
+    const laflar = [
+      "Hızlı olan kazanır! 😜",
+      "Çok yaklaştın ama kaçtım! 🏃‍♀️",
+      "Biraz daha hızlı basmalısın! 💨",
+      "Hahaha yakalayamazsın ki! 🎈",
+      "Pes etme son gayret! 🎁"
+    ];
+
+    function butonuKacir(e) {
+      if (kacmaSayisi >= maxKacma) return;
+
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      kacmaSayisi++;
+
+      const boundRect = boundary.getBoundingClientRect();
+      const btnWidth = btn.offsetWidth;
+      const btnHeight = btn.offsetHeight;
+
+      const maxX = boundRect.width - btnWidth - 16;
+      const maxY = boundRect.height - btnHeight - 16;
+
+      const randomX = Math.max(8, Math.floor(Math.random() * maxX));
+      const randomY = Math.max(8, Math.floor(Math.random() * maxY));
+
+      btn.style.left = `${randomX}px`;
+      btn.style.top = `${randomY}px`;
+
+      if (kacmaSayisi < maxKacma) {
+        const yeniOlcek = Math.max(0.75, 1 - (kacmaSayisi * 0.05));
+        btn.style.transform = `scale(${yeniOlcek})`;
+        mesaj.innerText = laflar[kacmaSayisi - 1];
+        btn.innerText = "Kaçtım! 🏃";
+      } else {
+        btn.style.transform = "scale(1)";
+        btn.className = "absolute bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-2.5 rounded-full text-xs shadow-lg shadow-emerald-500/40 animate-pulse cursor-pointer whitespace-nowrap";
+        btn.innerText = "Tamam Teslim Oldum, Tıkla ❤️";
+        mesaj.innerText = "Tamam tamam yakaladın! 🎉";
+        ipucu.innerText = "Aşırı tatlısın, butona dokunup hediyeni açabilirsin:";
+      }
+    }
+
+    btn.addEventListener('touchstart', butonuKacir, { passive: false });
+    btn.addEventListener('mouseover', butonuKacir);
+
+    btn.addEventListener('click', (e) => {
+      if (kacmaSayisi < maxKacma) {
+        butonuKacir(e);
+      } else {
+        document.getElementById('oyunAlaniKutusu').classList.add('hidden');
+        hediye.classList.remove('hidden');
+
+        confetti({ particleCount: 160, spread: 80, origin: { y: 0.6 } });
+        setTimeout(() => {
+          confetti({ particleCount: 100, angle: 60, spread: 60, origin: { x: 0 } });
+          confetti({ particleCount: 100, angle: 120, spread: 60, origin: { x: 1 } });
+        }, 300);
+      }
+    });
+
+    const audio = document.getElementById('bgMusic');
+    let isPlaying = false;
+    function muzikCal() {
+      if (!isPlaying) {
+        audio.play().then(() => {
+          isPlaying = true;
+          document.getElementById('musicText').innerText = "Çalıyor 🎶";
+          document.getElementById('musicIcon').innerText = "⏸️";
+        }).catch(() => alert("Klasöre sarkimiz.mp3 eklersen şarkınız çalar."));
+      } else {
+        audio.pause();
+        isPlaying = false;
+        document.getElementById('musicText').innerText = "Şarkımız";
+        document.getElementById('musicIcon').innerText = "🎵";
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-bg');
+      heart.innerHTML = ['❤️', '💖', '✨', '💕', '🌸'][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 2.5 + 4 + 's';
+      heart.style.fontSize = Math.random() * 10 + 16 + 'px';
+      document.getElementById('heartContainer').appendChild(heart);
+      setTimeout(() => heart.remove(), 6500);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
