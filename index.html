@@ -39,8 +39,8 @@
   <!-- Uçuşan Kalpler -->
   <div id="heartContainer"></div>
 
-  <!-- Müzik Çalar -->
-  <audio id="bgMusic" loop src="sarkimiz.mp3"></audio>
+  <!-- Müzik Çalar (wegh.mp3 bağlandı) -->
+  <audio id="bgMusic" loop src="wegh.mp3"></audio>
   <div class="fixed top-3 right-3 z-50">
     <button onclick="muzikCal()" id="musicBtn" class="bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-200 shadow-sm text-xs font-bold text-rose-600 hover:bg-white transition active:scale-95">
       <span id="musicIcon">🎵</span> <span id="musicText">Şarkımız</span>
@@ -62,11 +62,10 @@
       </p>
     </div>
 
-    <!-- ORTADA KOCAMAN FOTOĞRAF (elif.JPEG) -->
+    <!-- ORTADA FOTOĞRAF (elif.JPEG) -->
     <div class="relative inline-block mx-auto w-full px-4">
       <div class="w-full max-w-sm mx-auto aspect-[4/5] sm:aspect-square p-3 bg-white rounded-3xl shadow-2xl border-4 border-rose-200 transform -rotate-1 hover:rotate-0 transition duration-300">
         <div class="w-full h-full rounded-2xl overflow-hidden bg-rose-100 relative">
-          <!-- Dosya adının birebir elif.JPEG olması için ayarlandı -->
           <img src="elif.JPEG" alt="Elif" class="w-full h-full object-cover">
         </div>
       </div>
@@ -75,7 +74,7 @@
       </div>
     </div>
 
-    <!-- MATRUŞKA KAÇAN BUTON OYUN ALANI -->
+    <!-- KAÇAN BUTON OYUNU -->
     <div id="oyunAlaniKutusu" class="bg-white/85 backdrop-blur-md rounded-3xl p-5 border border-rose-200 shadow-lg space-y-3 mx-2">
       <div class="text-3xl animate-bounce">🎁</div>
       <h2 id="oyunMesaj" class="text-base font-extrabold text-slate-900">
@@ -92,14 +91,14 @@
       </div>
     </div>
 
-    <!-- HEDİYE / MEKTUP ALANI (YAKALAYINCA AÇILIR) -->
+    <!-- AÇILAN MEKTUP -->
     <div id="hediyeAlani" class="hidden bg-white rounded-3xl p-6 border-2 border-rose-300 shadow-2xl text-left space-y-3 mx-2">
       <div class="flex items-center gap-2 border-b border-rose-100 pb-2">
         <span class="text-2xl">💌</span>
         <h3 class="text-sm font-black text-rose-950">Hediyen Açıldı!</h3>
       </div>
       <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
-        Tebrikler yakaladın! Hayatıma girdiğin ilk andan beri hayatıma kattığın tüm güzellikler için sana teşekkür ederim.
+        Tebrikler yakaladın! Hayatıma girdiğin ilk andan beri bana kattığın tüm güzellikler için sana teşekkür ederim.
       </p>
       <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
         Yeni yaşında tüm hayallerin gerçek olsun; beraber güleceğimiz, keşfedeceğimiz ve kutlayacağımız upuzun yıllarımız olsun. Seni çok ama çok seviyorum!
@@ -196,7 +195,7 @@
           isPlaying = true;
           document.getElementById('musicText').innerText = "Çalıyor 🎶";
           document.getElementById('musicIcon').innerText = "⏸️";
-        }).catch(() => alert("Klasöre sarkimiz.mp3 eklersen şarkınız çalar."));
+        }).catch(() => alert("Şarkı çalınamadı. Dosya adının wegh.mp3 olduğundan emin ol!"));
       } else {
         audio.pause();
         isPlaying = false;
